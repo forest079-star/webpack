@@ -1,0 +1,6 @@
+build
+dist
+node_modules
+public
+src/IMHappyCode.js
+!.eslintrc.js
