@@ -1,6 +1,7 @@
 // 試著關閉 console.log 的檢查
 import $ from "jquery";
 import './css/app.scss';
+import './css/app.css';
 // import { add } from '@/utils';
 import foo from './IMHappyCode'
 

@@ -1,5 +1,6 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+// 讀取html 和注入 css 和 script 的 link
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const Webpack = require('webpack');
 
@@ -12,7 +13,7 @@ module.exports = {
   context: path.resolve('src'), //context 指定所有的檔案都從 src 資料始開始
   mode: process.env.NODE_ENV, // mode 一定要加，只能是 development 或是 production 兩種. 他可以知道環境變數目前是哪個模式 會看 package.json 設定
   entry: { // 程式進入點
-    app: ['./index.js'],
+    app: ['./index.js'], // 因為有加 context, 所以就不用寫 src
   },
   // https://webpack.js.org/configuration/devtool/
   devtool: DEV_MODE ? 'inline-source-map' : false, // production 發佈就拿掉 source-map
@@ -43,7 +44,7 @@ module.exports = {
         exclude: /node_modules/, // 排除文件，加速 webpack 打包
       },
       {
-        test: /\.scss$/,
+        test: /\.(css|scss)$/,
         use: [
           {
             loader: MiniCssExtractPlugin.loader, // start 把 css 存成實體.css檔案 而不是注入到 js 裡
@@ -67,6 +68,7 @@ module.exports = {
           },
         ],
         include: path.resolve('src/css'),
+        exclude: /node_modules/
       },
       // 啟用 pug
       // {
@@ -158,7 +160,7 @@ module.exports = {
     port: 3000,
     hot: true, // 支援 css hot reload
     // 可以用 ip 連線，預設是 localhost
-    host: '0.0.0.0',
+    // host: '0.0.0.0',
     stats: 'minimal',
   },
    // start 把其他libary 拆成獨立的 JS (verdors)
